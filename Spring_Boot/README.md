@@ -2,7 +2,6 @@ Spring Boot
 ---
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 2. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
-3. [212 ](#212spring-boot---efficient-development-configuration-and-deployment)
 
 ----------------------
 
@@ -60,8 +59,6 @@ Spring Boot
 
 
 
-## 212Spring Boot - Efficient Development, Configuration and Deployment
-* ww
 
 
 
