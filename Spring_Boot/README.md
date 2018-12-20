@@ -2,6 +2,7 @@ Spring Boot
 ---
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 2. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
+3. [Spring Big Picture](#spring-big-picture)
 
 ----------------------
 
@@ -54,9 +55,33 @@ Spring Boot
     * run cmd `./mvnw docker:build`
 
 
+## Spring Big Picture
 
-
-
+#### Spring Framework
+* Six key areas
+  * Core
+    * is a dependency injection container
+    * is a clue
+  * Web
+    * handling web requext
+    * Spring Web MVC
+      * servlet _(A servlet is an obejct that receives a request and generates a response based on that request --Wikipedia)_
+    * Spring Webflux
+      * reactive programming
+      * Webflux handles web requests differently
+        * asynchronous execution
+        * doesn't block(wait)
+          * better resource utilization
+  * AOP 
+    * aspect-orentied programming
+  * Data Access
+  * Integration
+    * RMI
+    * Messaging
+    * Web services
+      * `RestController` - expose REST web service
+      * `RestTemplate` - invoke REST web service
+  * Testing
 
 
 
