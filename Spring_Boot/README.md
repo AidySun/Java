@@ -4,6 +4,7 @@ Spring Boot
 1. [Java Microservices Spring Cloud Developing Services](#java-microservices-spring-cloud-developing-services)
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
+1. 微服务架构-spring boot 轻松上手
 
 ----------------------
 
