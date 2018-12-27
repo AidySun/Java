@@ -79,6 +79,9 @@ Microservice
 * Embeds app server in executable JAR
 * Build in endpoints for health metrics
 
+## Spring Config
+* Configurations are loaded based on `app name, spring profile, label`
+
 ### Config Server
 1. add `spring-cloud-config-server` and `spring-boot-starter-actuator` in `pom.xml`
 2. add `@EnableConfigServer` annotaton to class
@@ -95,15 +98,15 @@ Microservice
   * url would be `http://localhost:8080/application-name`
   ```
   # application.properties
-  spring.application.name=app2  # application
+  spring.application.name=app2  # app name
   ```
   
   ```
   # bootstrap.properties
 
   # these settings won't take effect if in application.properties, 
-  # because that is too late for application to get corrent label/profile
-  spring.profiles.active=qa     # lablel
+  # because that is too late for application to get correct profile
+  spring.profiles.active=qa     # profile
   spring.cloud.config.uri=http://localhost:8080
   ```
 
