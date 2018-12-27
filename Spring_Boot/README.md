@@ -84,7 +84,28 @@ Microservice
 2. add `@EnableConfigServer` annotaton to class
 3. create application properties 
 
+### Config Client
+* specific config would override default config
+  * `application.yml/properties`
+  * applications 
+    * default - `app1.properties`
+    * with label - `app1-qa.yml`
+  * Label
+* Sample application.properties
+  * url would be `http://localhost:8080/application-name`
+  ```
+  # application.properties
+  spring.application.name=app2  # application
+  ```
+  
+  ```
+  # bootstrap.properties
 
+  # these settings won't take effect if in application.properties, 
+  # because that is too late for application to get corrent label/profile
+  spring.profiles.active=qa     # lablel
+  spring.cloud.config.uri=http://localhost:8080
+  ```
 
 
 
