@@ -56,8 +56,10 @@ Microservice
 
 # Java Microservices Spring Cloud Developing Services
 
-## Microservices
-### core characteristics
+## Intro to Microservices, Spring Boot and Spring Cloud
+
+### Microservices
+#### core characteristics
 * components exposed as services
 * tied to a specific domain (micro in microservice, small scope of the service)
 * loosely coupled
@@ -66,28 +68,29 @@ Microservice
 * delivered continuously via automation
 * built and run by independent teams
 
-### Why are microservices architectures popular?
+#### Why are microservices architectures popular?
   * desire for faster changes
   * need for greater availability
   * motivation for fine-grained scaling
   * compatible with a DevOps mindset
 
-## Spring Boot
+### Spring Boot
 * Convention, not configuration
 * Opinions can be overridden
 * Simple dependency management
 * Embeds app server in executable JAR
 * Build in endpoints for health metrics
 
-## Spring Config
+## Simplifying Env Management with Centralized Configuration
+### Spring Config
 * Configurations are loaded based on `app name, spring profile, label`
 
-### Config Server
+#### Config Server
 1. add `spring-cloud-config-server` and `spring-boot-starter-actuator` in `pom.xml`
 2. add `@EnableConfigServer` annotaton to class
 3. create application properties 
 
-### Config Client
+#### Config Client
 * specific config would override default config
   * `application.yml/properties`
   * applications 
@@ -110,7 +113,38 @@ Microservice
   spring.cloud.config.uri=http://localhost:8080
   ```
 
+### Centralized Configuration using Git
+* **TODO**
+  * Auth
+  * Encryption and Decryption
+  * Refreshing configuration
 
+## Offloading Async Activities with Lightweight, Shot-lived Tasks
+#### Asynchronous processing in Microservices
+  * reduce denpendencies between services
+    * messaging is a key conponent
+  * support low latency, high thoughput
+  * Facilitate event-driven computing
+    * no waiting
+
+#### Problems with Status Quo (synchronous communication)
+  * Waste resources - consuming resources even when services aren't in use
+  * Heavy - services baked into monolithic deployments (all in one)
+  * Unflexible - challenges scaling services on demand
+  * Hard debugging - Diffculty tracing services calls
+
+#### What Exactly Is "Serverless" Computing
+  * Deploy "function" instead of "application"
+  * Run code without know of infrastructure
+  * Automatic horizental scaling
+  * start fast, run short
+
+#### Spring Cloud Task
+**Short-lived, asynchronous microservices**
+* Spring (Boot) with access to beans
+* Task is stateless
+* Bootstrap logic with Runner
+* Can subscribe to lifecycle events
 
 
 
