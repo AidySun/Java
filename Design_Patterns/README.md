@@ -7,9 +7,9 @@
 
 ----
 
-## Creational
+# CREATIONAL
 
-#### Singleton
+### Singleton
   1. Lazily loaded
   2. Only one instance created
   3. Should be thread safe
@@ -40,9 +40,11 @@
   ```
   * if there is another static property, its get method should NOT be static, because it should be called via singleton instance object.
 
-#### Builder
+### Builder
 For objects have multiple steps or parameters to create, using Builder to avoid long parameters or many setters.
-  * Objects created are **immutable** (no setter methods)
+
+  * Object's class seperates with its creating process
+  * ? Objects created are immutable (no setter methods)
   * Handles complex constructors
     * large num of parameters (telescoping) 
     * lots of setters
@@ -55,10 +57,18 @@ For objects have multiple steps or parameters to create, using Builder to avoid 
 
     public static class Builder {
         private String meat;
+        private String drink;
+
         public Builder meat(String meatname) {
             this.meat = meatname;
             return this;
         }
+
+        public Builder drink(String drink) {
+            this.drink = drink;
+            return this;
+        }
+
         public Builder build() {
             return new Lunch(this); // similar to StringBuilder.toString()
         }
@@ -75,16 +85,16 @@ For objects have multiple steps or parameters to create, using Builder to avoid 
   // Usage
   Lunch.Builder lb = new Lunch.Builder();
   lb.meat("beef").bread("xxx").drink("yyyy");
-  Lunch lunch = lb.build;
+  Lunch lunch = lb.build();
   ```
   * Builder contrast with Prototype
     * Builder handles complex constructors, while Prototype avoids calling complex constructors.
     * Builder has no interfaces.
     * Objects created by builder is immutable.
 
-#### Prototype
-Pre-create some instances, clone based on them when needed rather than new.
-  * Avoids costly/weight creation (not absolute, clone can be as same cost as new)
+### Prototype
+Pre-create some instances, clone based on them when needed rather than new. Similiar with cache.
+  * Avoids costly/weight creation (e.g. lots of condition/calculation during creation, or complex permission checking)
     * Register can load/create costly objects as *templates/prototypes*, return the clone of object itself to create a new object instance.
     * Lighter weight construction
       * using copy constructor or clone
@@ -129,7 +139,7 @@ Pre-create some instances, clone based on them when needed rather than new.
     * Cons
       * cloning complex objects that have **circular references** might be very tricky
 
-#### Factory
+### Factory
   * Parameter driven - parameterized create method
   * Works together with interface/abstract classes and subclasses
   * Real creation occurs in concrete/sub classes
@@ -160,7 +170,7 @@ Pre-create some instances, clone based on them when needed rather than new.
   }
   ```
 
-#### AbstractFactory
+### AbstractFactory
 Abstract factory is two (or more) layer of factory, super factory gets input parameter to decide which sub-factor is returned.
 Sub-factory uses parameter input to decide with sub-class of object is created.
   * Factory of Factories
@@ -197,7 +207,73 @@ Sub-factory uses parameter input to decide with sub-class of object is created.
     * Problem specific
     * Starts as a Factory
 
-## Structural
+
+# STRUCTURAL
+
+### Adaptor
+It's a kind of wrapper or convertor. Generally work with legeacy code.
+  ```Java
+  public interface Employee {
+    public String getName();
+    public int getID();
+    // ...
+  }
+
+  public class EmployeeAdapterOldData implements Employee {
+    private OldData instance;
+
+    @Override String getName() {
+      instance.getFirstName();
+    }
+
+  }
+  ```
+
+An interface of a class like `Employee`, the methods generally are getters & setters.
+
+### Bridge
+  * When there are (more than) two different dimensions that could change seperately. (e.g. Shape and Color, platform and type)
+  * Decouple abstract class and implementation class. 
+  * Avoid subclass-expanding
+  * Kind of composition is better than inheritance.
+  * Runtime composition but not compile-time composition
+  * Abstract class and Implementation class are all interfaces (abstract visual classes), they have their own sub-classes
+  ```Java
+  // Java
+  interface Shape {
+    private Color color;
+  }
+  
+  class Square implements Shape {
+  }
+  
+  interface Color {
+  }
+  
+  class Red implements Color {
+  }
+  ```
+  
+  ```CPP
+  // C++
+  class Messager {
+  private:
+    MessagerImpl *impl;
+  public:
+    void func0101() {
+      impl->funcbbbbb();
+    }
+    virtual void funca() = 0;
+  }
+  
+  class MessageImpl {
+  public:
+    virtual int funcbbbbb() = 0;
+  }
+  ```
+  * Cons of Inheritence
+    * Force injection - subclass MUST inherit everything of super class
+    * Any change to super class would affect all its children
 
 
 
@@ -209,9 +285,7 @@ Sub-factory uses parameter input to decide with sub-class of object is created.
 
 
 
-
-
-## Behavioral
+# Behavioral
 
 
 
