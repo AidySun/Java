@@ -4,7 +4,7 @@ Spring Boot
 1. [Java Micro-services Spring Cloud Developing Services](#java-microservices-spring-cloud-developing-services)
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
-1. [Springboot - Microservice](#xpringboot---microservice)
+1. [Springboot - Microservice](#spring-boot-micro-services-architecture)
 
 ----------------------
 
@@ -226,7 +226,7 @@ Micro-service
 
 
 
-# Springboot - Microservice
+# Spring Boot (Micro-services Architecture)
 From iQiYi.
 ### Exception in SpringBoot
 1. Customized error page
