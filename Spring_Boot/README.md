@@ -1,7 +1,7 @@
 Spring Boot
 ---
 1. [Spring Big Picture](#spring-big-picture)
-1. [Java Microservices Spring Cloud Developing Services](#java-microservices-spring-cloud-developing-services)
+1. [Java Micro-services Spring Cloud Developing Services](#java-microservices-spring-cloud-developing-services)
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
 1. 微服务架构-spring boot 轻松上手
@@ -16,7 +16,7 @@ Spring Boot
       * is a dependency injection container
       * is a clue
   2. Web
-      * handling web requext
+      * handling web request
       * spring web mvc
         * servlet _(a servlet is an obejct that receives a request and generates a response based on that request --wikipedia)_
       * spring webflux
@@ -26,7 +26,7 @@ Spring Boot
           * doesn't block(wait)
             * better resource utilization
   3. AOP 
-      * aspect-orentied programming
+      * aspect-oriented programming
   4. Data Access
       * focuses on relational database, which is different from _Spring Data_
   5. Integration
@@ -44,9 +44,9 @@ While **Spring Framework Data Access** is focused one particular type of databas
 JPA - Java Persistent API
 
 ## Spring Cloud
-Tools for developers to quickly build some common patterns in **distributed systems** (e.g. config management, service discovery, curcuit breakers, intelligent rounting, cluster state...)
+Tools for developers to quickly build some common patterns in **distributed systems** (e.g. config management, service discovery, circuit breakers, intelligent routing, cluster state...)
 Based on Spring Boot
-Microservice
+Micro-service
 
 ## Spring Security
 * Authentication (verifying the identify of a user) 
@@ -54,21 +54,21 @@ Microservice
 
 
 
-# Java Microservices Spring Cloud Developing Services
+# Java Micro-services Spring Cloud Developing Services
 
-## Intro to Microservices, Spring Boot and Spring Cloud
+## Intro to Micro-services, Spring Boot and Spring Cloud
 
-### Microservices
+### Micro-services
 #### core characteristics
 * components exposed as services
-* tied to a specific domain (micro in microservice, small scope of the service)
+* tied to a specific domain (micro in micro-service, small scope of the service)
 * loosely coupled
-  * deploy seperately
+  * deploy separately
 * built to tolerate failure
 * delivered continuously via automation
 * built and run by independent teams
 
-#### Why are microservices architectures popular?
+#### Why are micro-services architectures popular?
   * desire for faster changes
   * need for greater availability
   * motivation for fine-grained scaling
@@ -120,32 +120,42 @@ Microservice
   * Refreshing configuration
 
 ## Offloading Async Activities with Lightweight, Shot-lived Tasks
-#### Asynchronous processing in Microservices
-  * reduce denpendencies between services
-    * messaging is a key conponent
-  * support low latency, high thoughput
+#### Asynchronous processing in Micro-services
+  * reduce dependencies between services
+    * messaging is a key component
+  * support low latency, high throughput
   * Facilitate event-driven computing
     * no waiting
 
 #### Problems with Status Quo (synchronous communication)
   * Waste resources - consuming resources even when services aren't in use
   * Heavy - services baked into monolithic deployments (all in one)
-  * Unflexible - challenges scaling services on demand
-  * Hard debugging - Diffculty tracing services calls
+  * Inflexible - challenges scaling services on demand
+  * Hard debugging - Difficulty tracing services calls
 
-#### What Exactly Is "Serverless" Computing
+#### What Exactly Is "Server-less" Computing
   * Deploy "function" instead of "application"
   * Run code without know of infrastructure
-  * Automatic horizental scaling
+  * Automatic horizontal scaling
   * start fast, run short
 
 #### Spring Cloud Task
-**Short-lived, asynchronous microservices**
+**Short-lived, asynchronous micro-services**
 * Spring (Boot) with access to beans
 * Task is stateless
 * Bootstrap logic with Runner
-* Can subscribe to lifecycle events
+* Can subscribe to life-cycle events
 
+#### OAuth2.0
+* OAuth is a protocol for authorization
+* provides authorization flow for various clients
+  * gets a toke after authentication
+  * check token with session on authorization server
+* Obtain limited access to use accounts
+* Separates idea of user and client
+* Access token carries more than identity
+  * token-based
+* NOT a authentication scheme
 
 
 
@@ -187,10 +197,10 @@ Microservice
     * ServletContext
     * JNDI
     * System.getProperties
-    * Systen Environment Variables
+    * System Environment Variables
   * Random Value Property Source    
   * `application.properties` / YAML + variants
-    * profile-spedific config 1st
+    * profile-specific config 1st
       * application-{profile}.yml   
     * generic config 2nd
       * application.yml
@@ -205,7 +215,7 @@ Microservice
 
 * Monitoring your apps in the cloud
   * Spring Boot Actuator
-  * builtin production ready endpoints
+  * built-in production ready endpoints
     * `/autoconfig /beans /configprops /dump /health`
 
 * Deploy Spring Boot apps to the cloud using Docker

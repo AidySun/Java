@@ -305,4 +305,3 @@ An interface of a class like `Employee`, the methods generally are getters & set
 
 
 
-https://app.pluralsight.com/player?course=design-patterns-java-creational

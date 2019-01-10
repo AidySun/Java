@@ -27,12 +27,12 @@ POM - project object model
 
 ### Goals
 Goals are the plug-ins configured in the maven install. In Super POM.
-Golas are tied to a phase.
+Goals are tied to a phase.
 
 * clean - delete target dir and generated resources
 * compile - compiles code, generates any files, copy to classes dir
 * test
-* pacakge - run compile first, run any tests, packaging
+* package - run compile first, run any tests, packaging
 * install - run `package` command and then installs it in your local repo (~/.m2)
 * deploy - run install command and then deploys it to a corporate repo / or shared location, often confused with deploying to a web server
   * deploy doesn't mean deploy to an app server
@@ -50,12 +50,12 @@ Golas are tied to a phase.
 ### Dependencies
 * will be pulled from Maven 
 * transitive dependencies - Maven would download required dependencies of dependent libraries 
-  * newer version would be used for confliction
+  * newer version would be used for conflict
 
 ### Versions
 * SNAPSHOT - latest version (development version), check for update every compile time
 * release version doesn't have a naming convention in Maven
-* RC - release condidate
+* RC - release candidate
 
 ### Types
 * default is jar
@@ -65,7 +65,7 @@ Golas are tied to a phase.
 * for dependencies
 * compile - default
 * provided - available in all phases, but not included in final artifact
-* runtime - need for execution but not for compilation. Avilable for all phases but compilation, not included in final artifact
+* runtime - need for execution but not for compilation. Available for all phases but compilation, not included in final artifact
 * test
 * system - don't use it
 * import - advance topic
@@ -84,8 +84,37 @@ Golas are tied to a phase.
   * <plugin><configuration><source> and <target> are the two features people overwrite the most to tell it to use a diff target.
   
 
+### Tips
 
+* Add local dependencies:
+```XML
+<dependency>
+    <groupId>com.sample</groupId>
+    <artifactId>sample</artifactId>
+    <version>1.0</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/src/main/resources/yourJar.jar</systemPath>
+</dependency>
+```
 
+* `mvn install` commands
+```Shell
+mvn install:install-file \
+   -Dfile=<path-to-file> \
+   -DgroupId=<group-id> \
+   -DartifactId=<artifact-id> \
+   -Dversion=<version> \
+   -Dpackaging=<packaging> \
+   -DgeneratePom=true
+
+# sample
+mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file  \
+    -Dfile=/some/path/on/my/local/filesystem/felix/servicebinder/target/org.apache.felix.servicebinder-0.9.0-SNAPSHOT.jar \
+    -DgroupId=org.apache.felix -DartifactId=org.apache.felix.servicebinder \
+    -Dversion=0.9.0-SNAPSHOT -Dpackaging=jar \
+    -DlocalRepositoryPath=${master_project}/local-maven-repo
+
+```
 
 
 
