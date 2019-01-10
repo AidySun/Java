@@ -4,7 +4,7 @@ Spring Boot
 1. [Java Micro-services Spring Cloud Developing Services](#java-microservices-spring-cloud-developing-services)
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
-1. 微服务架构-spring boot 轻松上手
+1. [Springboot - Microservice](#xpringboot---microservice)
 
 ----------------------
 
@@ -223,4 +223,53 @@ Micro-service
   * [docker-maven-plugin](https://github.com/spotify/docker-maven-plugin)
     * add plugin in `pom.xml`
     * run cmd `./mvnw docker:build`
+
+
+
+# Springboot - Microservice
+From iQiYi.
+### Exception in SpringBoot
+1. Customized error page
+  * `/error` page is the default page when exception happens in Springboot
+  * `BasicExceptionController` 
+2. `@ExceptionHandler` 
+  ```Java
+  // In @Controller class
+  @ExceptionHandler(value={java.lang.ArithmeticException.class})
+  public ModelAndView anyFunName(Exception e) {
+      ModelAndView mv = new ModelAndView();
+      mv.setAttribute("key", e.toString());
+      mv.setView("redirect page");
+      return mv;
+  }
+  ```
+3. 
+4.
+5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
