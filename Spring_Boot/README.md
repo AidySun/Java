@@ -157,23 +157,14 @@ Micro-service
   * token-based
 * NOT a authentication scheme
 
+* Roles
+  * resource owner _(e.g. a facebook user)_
+  * client application _(application using by user)_
+  * resource server _(e.g. user's friends list in facebook)_
+  * authorization server _(facebook's authorization server)_
+    * resource server may be together with authorization server
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* **TODO: performance tuning**
 
 
 # Creating Your First Spring Boot Application
