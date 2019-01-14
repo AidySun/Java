@@ -224,6 +224,7 @@ From iQiYi.
   * `/error` page is the default page when exception happens in Springboot
   * `BasicExceptionController` 
 2. `@ExceptionHandler` 
+  * Cons: each controller has its own exception handlers, exception handlers cannot work across controllers
   ```Java
   // In @Controller class
   @ExceptionHandler(value={java.lang.ArithmeticException.class})
@@ -234,12 +235,60 @@ From iQiYi.
       return mv;
   }
   ```
-3. 
-4.
-5.
+3. `@ControllerAdvice` + `@ExceptionHandler`
+  * Exception handlers are defined in **shared** exception handler class, not in specific controllers
+4. `SimpleMappingExceptionResolver`
+  * Mapping specific exceptions with views
+  * Cannot transport exception info
+5. Customized `HandlerExceptionResolver`
+  ```Java
+  public ModelAndView resolverException() { }
+  ```
 
+### Test
+```Java
+// junit + spring
+@RunWith(SpringUnit4ClassRunner.class)
+// 1. springboot test class;  2. springboot startup classes
+@SpringBootText(classes={App.class})
+public MyTest {
+  @AutoWired
+  private MyDaoImpl myDaoImpl;
+  @Test
+  public void testCase() {
+    myDaoImpl.saveUsers();
+  }
+}
 
+```
 
+### Springboot Hot Deploy
+1. SpringLoader
+  * Hot deploy
+  * only works to server side Java code, but not frontend pages
+  1. a maven plug-in
+    * works when run with `Maven build (spring-boot:run)`
+    * Plugin works as a backend process, needs to be ended manually by killing process
+  2. springloader jar file under `lib` dir
+    * Run Config -> VM arguments " javaagent ..."
+    * does not need to kill process manually
+
+2. DevTools
+  * Re-deploy, not hot deploy
+  * works for both java code and html page
+
+### JPA
+// TODO
+
+### Caching
+* Ehcache
+  ```Java
+  @EnableCaching // for App.class
+  @Cacheable(value="customizedCacheName", key="#parameterName")      // for method
+  @CacheEvit(value="cacheName", allEntries=true)   // clear cache 
+  ```
+* Redis
+    
 
 
 
