@@ -54,7 +54,9 @@ For objects have multiple steps or parameters to create, using Builder to avoid 
   // Builder general should be an inner static class
   class Lunch {
     final private String meat;
+    final private String drink;
 
+    // Builder could be a external class instead of internal
     public static class Builder {
         private String meat;
         private String drink;
@@ -75,10 +77,9 @@ For objects have multiple steps or parameters to create, using Builder to avoid 
     }
 
     public Lunch(Builder b) {
-        meat = b.meat;
+        this.meat = b.meat;
+        this.drink = b.drink;
     }
-    public getMeat() { return meat; }
-
     // NO setter is needed 
   }
 
@@ -87,10 +88,14 @@ For objects have multiple steps or parameters to create, using Builder to avoid 
   lb.meat("beef").bread("xxx").drink("yyyy");
   Lunch lunch = lb.build();
   ```
+
   * Builder contrast with Prototype
     * Builder handles complex constructors, while Prototype avoids calling complex constructors.
     * Builder has no interfaces.
     * Objects created by builder is immutable.
+  * Best Practices
+    * balance with Template Pattern
+    * `Director` creates `Builder` makes `Product`
 
 ### Prototype
 Pre-create some instances, clone based on them when needed rather than new. Similiar with cache.
@@ -161,13 +166,24 @@ Pre-create some instances, clone based on them when needed rather than new. Simi
     }
 
     class WebsiteFactory {
-        public static Website get(String type) {
+        public static Website get(String type) {  // using String parameter
             if (type == "blog") {
                 return new BlogWebsite();
             } // else ...
         }
+
+        public <T extends Website> T get(Class<T> c) { // using Generic
+          Website website = null;
+          try {
+            website = (T)Class.forName(c.getName()).newInstance();
+          } cache (Exception e) {}
+          return (T)website;
+        }
     }
   }
+
+  // Usage
+  Website website = WebsiteFactory.get(BlogWebsite.class);
   ```
 
 ### AbstractFactory
@@ -185,7 +201,8 @@ Sub-factory uses parameter input to decide with sub-class of object is created.
         if (score > 100) return new VisaFactory();
         // else ...
     }
-    public abstract CreditCart getCart(String cardType);
+    public abstract <T extends Cart> T getCart(Class<T> c); // by class
+    public abstract CreditCart getCart(String cardType);    // by string
     public abstract CardValidator getCardValidator(String cardType);
   }
 
@@ -206,7 +223,8 @@ Sub-factory uses parameter input to decide with sub-class of object is created.
     * Pattern within a pattern
     * Problem specific
     * Starts as a Factory
-
+  * Best Practices
+    * cross-platform applications
 
 # STRUCTURAL
 
