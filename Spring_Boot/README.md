@@ -278,7 +278,39 @@ public MyTest {
   * works for both java code and html page
 
 ### JPA
-// TODO
+* application.properties
+```sh
+spring.datasource.driverClassName=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/databasename
+spring.datasource.username=admin
+
+spring.datasource.type=com.alibaba.druid.pool.DruidDataSource # pool
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+* Dao interface
+```Java
+class my class extends JpaRepository<User, Integer> {
+  // Users: entity class
+  // Integer: type of key
+}
+
+// class Repository<T, ID>
+```
+
+* HQL v.s. SQL
+`@Query(<HQL/SQL>)`
+1. HQL is object(instance) based; SQL is database based
+2. HQL: `from <ClassName> where <condition based on class' properties>`
+3. SQL: `from <table name in database> where <sql condition>`  
+4. HQL does NOT need key words `insert, update, delete`, it uses methods `save(), update(), delete()`  
+
+* Notes
+  * When using `@Test` and `@Transactional` together, transaction rollback automatically
+  * `@Rollback(false)` can resove above issue 
+
 
 ### Caching
 * Ehcache
