@@ -219,6 +219,23 @@ Micro-service
 
 # Spring Boot (Micro-services Architecture)
 From iQiYi.
+
+### Servlet
+* two ways to registe servlet
+  1. annotation
+  ```Java
+  @WebServlet(name="myServlet", urlPatterns="/myserv")
+  class MyServletClass extends HttpServlet {}
+
+  @ServletComponentScan
+  public class App { }
+  ```
+  2. method
+  ```Java
+  @Bean
+  public  ServletRegistrationBean getxxxx() { }
+  ```
+  
 ### Exception in SpringBoot
 1. Customized error page
   * `/error` page is the default page when exception happens in Springboot
@@ -299,6 +316,12 @@ class my class extends JpaRepository<User, Integer> {
 
 // class Repository<T, ID>
 ```
+* CrudRepository
+* PagingAndSortingRepository
+* JpaRepository
+* JPASepecificationExecutor
+* `@OneToMany` and `@ManyToMany`
+
 
 * HQL v.s. SQL
 `@Query(<HQL/SQL>)`
@@ -311,6 +334,19 @@ class my class extends JpaRepository<User, Integer> {
   * When using `@Test` and `@Transactional` together, transaction rollback automatically
   * `@Rollback(false)` can resove above issue 
 
+
+### Quartz
+* Job scheduling framework
+* `QuartzConfig`
+  * Job
+  * Trigger
+  * Scheduler 
+* Cron
+ ```Java
+  // Sechonds Minutes Hours Day Month Week [Year] 
+  @Scheduled(cron="0/2 * * * * ?") // every 2 seconds
+  @Scheduled(cron="3 * * * * ?") // every minutes' 3rd seconds
+  ```
 
 ### Caching
 * Ehcache
