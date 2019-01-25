@@ -5,6 +5,7 @@ Spring Boot
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
 1. [Springboot - Microservice](#spring-boot-micro-services-architecture)
+1. [Spring-163](#Spring-163)
 
 ----------------------
 
@@ -359,7 +360,42 @@ class my class extends JpaRepository<User, Integer> {
     
 
 
+# Spring-163
+### IoC & DI
+* IoC - inverse of control
+  * get rid of `Factory` class
+  * do NOT need to create object with `new()` and `setters()`
+  * getting object from IoC pool
+  ```Java
+  ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+  MyClass object = context.getBean("MyClass");
+  ```
+* DI - 
+  1. `setXxxx()`
+    ```XML
+    <property>
+    ```
+  2. constructor
+    ```XML
+    <constructor-arg>
+    ```
+  3. namespace - import `xmlns:p` in `applicationContext.xml`
+    ```XML
+    <bean id="mybean" class="com.aidy.mybean" p:name="tom" p:age="20" p:company-ref="company-bean-id"/>
+    ```
+  4. `autowire`
+    ```XML
+    <bean ... autowire="byName|byType|constructor">
+    ```
 
+### Bean
+* Ways to add to IoC
+  1. set bean in applicationContext.xml
+  2. using annotation
+    * `@Component`
+      * `@Repository`
+      * `@Service`
+      * `@Controller`
 
 
 
