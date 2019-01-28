@@ -270,7 +270,7 @@ From iQiYi.
 // 1. springboot test class;  2. springboot startup classes
 @SpringBootText(classes={App.class})
 public MyTest {
-  @AutoWired
+  @Autowired
   private MyDaoImpl myDaoImpl;
   @Test
   public void testCase() {
@@ -396,6 +396,17 @@ class my class extends JpaRepository<User, Integer> {
       * `@Repository`
       * `@Service`
       * `@Controller`
+* In Web application, there are two kinds of containers
+  1. Web/servlet/tomcat container
+  2. Spring IoC container
+  ```Java
+  // transport BEAN from Spring IoC container to Servlet container (pure Spring only, Strust, Spring MVC don't need this step)
+  // In init() of servlet class
+  // 1. ApplicationContext context = new ClassPathXMLApplicationContext("applicationContext.xml");
+  // 2. 
+  ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+  this.objectService = (ObjectService)context.getBean("beanNameDefinedInXML");
+  ```
 
 * Making a common class specific
   * Implementation
@@ -415,6 +426,20 @@ Aspect oriented programming
   </aop:config>
   ```
 
+### Mybatis
+* in `conf.xml`
+  1. datasource conf
+  2. mapper conf
+* `SqlSessionFactory`  
+
+### Annotation
+```Java
+// by type
+@Autowired 
+// by name/id
+@Autowired
+@Qualifier("stuDao")
+```
 
 
 
