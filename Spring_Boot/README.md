@@ -397,6 +397,23 @@ class my class extends JpaRepository<User, Integer> {
       * `@Service`
       * `@Controller`
 
+* Making a common class specific
+  * Implementation
+  * Inheritece
+  * Annotation
+  * Configuration 
+
+### AOP
+Aspect oriented programming
+* `aspectJweaver.jar`
+* `Interface MethodBeforeAdvice`
+* In applicationContext.xml
+  ```XML
+  <aop:config>
+    <aop:pointcut expression="execution(xxxx)" id="addMethod"></aop:pointcut>
+    <aop:advisor advice-ref="idOfAspectInXML" pointcut-ref="addMethod"></aop:advisor>
+  </aop:config>
+  ```
 
 
 
