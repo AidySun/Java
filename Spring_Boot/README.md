@@ -5,7 +5,7 @@ Spring Boot
 1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
 1. [Springboot - Microservice](#spring-boot-micro-services-architecture)
-1. [Spring-163](#Spring-163)
+1. [Spring-163](#spring-163)
 
 ----------------------
 
@@ -221,8 +221,8 @@ Micro-service
 # Spring Boot (Micro-services Architecture)
 From iQiYi.
 
-### Servlet
-* two ways to registe servlet
+### Servlet / Filter / Listener
+* two ways to registe Servlet / Filter
   1. annotation
   ```Java
   @WebServlet(name="myServlet", urlPatterns="/myserv")
@@ -231,6 +231,7 @@ From iQiYi.
   @ServletComponentScan
   public class App { }
   ```
+
   2. method
   ```Java
   @Bean
