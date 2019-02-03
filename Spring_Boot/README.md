@@ -1,11 +1,17 @@
 Spring Boot
 ---
-1. [Spring Big Picture](#spring-big-picture)
-1. [Java Micro-services Spring Cloud Developing Services](#java-microservices-spring-cloud-developing-services)
-1. [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
-1. [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
-1. [Springboot - Microservice](#spring-boot-micro-services-architecture)
-1. [Spring-163](#spring-163)
+
+<!-- MarkdownTOC levels="1" autolink="true" -->
+
+- [Spring Big Picture](#spring-big-picture)
+- [Java Micro-services Spring Cloud Developing Services](#java-micro-services-spring-cloud-developing-services)
+- [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
+- [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
+- [Spring Boot \(Micro-services Architecture\)](#spring-boot-micro-services-architecture)
+- [Spring-163](#spring-163)
+- [Spring Boot with RESTful-163](#spring-boot-with-restful-163)
+
+<!-- /MarkdownTOC -->
 
 ----------------------
 
@@ -362,6 +368,7 @@ class my class extends JpaRepository<User, Integer> {
 
 
 # Spring-163
+
 ### IoC & DI
 * IoC - inverse of control
   * get rid of `Factory` class
@@ -442,6 +449,40 @@ Aspect oriented programming
 @Qualifier("stuDao")
 ```
 
+
+# Spring Boot with RESTful-163
+
+* SLF4j / Commons-logging config
+```yml
+# yml
+logging:
+  file: target/app.log
+  level:
+    ROOT: WARN
+      com.aidy.services: DEBUG
+```
+
+* CURL command line
+```sh
+curl -H "Content-type:application/json" -X POST --data '{"id":"110","name":"mason"}' http://localhost:8080/test
+curl -X DELETE [-v] http://localhost:8080/service
+```
+
+* Annotation
+```Java
+@GetMapping("/{id}")
+public XXXDto get(@PathVariable id) {  }
+@PostMapping
+public XXXDto insert(@RequestBody XXXDto dto) {  }
+// post is add, put is update
+@PutMapping("/{id}")
+public XXXDto update(@PathVariable id, 
+                    HttpServletRequest request,
+                    @RequestPama(valid="name", required=false) String name) {  
+  // request.getRemoteAdd()
+  // curl -X Put --data '"{"id":"101"}' http://local:80/service/101?name=aidy
+}
+```
 
 
 
