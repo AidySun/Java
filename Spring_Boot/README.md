@@ -483,6 +483,29 @@ public XXXDto update(@PathVariable id,
   // curl -X Put --data '"{"id":"101"}' http://local:80/service/101?name=aidy
 }
 ```
+* Upload and download
+```Java
+// upload 
+@PostMapping(value="/{id]/photo" comsumes="MULTIPART_FORM_DATA_VALUE")
+public void addPhoto(@PathVariable int id, @RequestPama("photo") MultipartFile imageFile) { }
+// download with binary / byte array
+@GetMapping(value="/{id}/icon" produces=MediaType.IMAGE_JPEG_VLAUE)
+public byte[] getIcon(@PathVariable int id) { }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
