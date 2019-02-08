@@ -435,6 +435,7 @@ Aspect oriented programming
   ```
 
 ### Mybatis
+* library to operate database
 * in `conf.xml`
   1. datasource conf
   2. mapper conf
@@ -451,6 +452,17 @@ Aspect oriented programming
 
 
 # Spring Boot with RESTful-163
+* POJO - plain ordinary java object
+
+* DTO - data transfer object
+  * it is transferred POJO
+* DAO - data access object
+* PO  - persistent object
+  * it is persistented POJO
+
+* PBF - package by feature
+* PBL - package by layer
+
 
 * SLF4j / Commons-logging config
 ```yml
@@ -493,10 +505,41 @@ public void addPhoto(@PathVariable int id, @RequestPama("photo") MultipartFile i
 public byte[] getIcon(@PathVariable int id) { }
 ```
 
+### Validation 
+* JSR - is a standard
+* Hebernite Validation - is am implementation
 
+* For the cases that one object needs different validations in different cases, `@groups` would be the answer.
+* When the validation failes
+```Java
+// 1. return 400 error code to client
+public Object doSomething(@Validated @RequestBody MyClass myclss) {  }
+// 2. handle the validation failure in server side, instead of returing 400 
+public Object doSomething(@Validated @RequestBody MyClass myclass, BindingResult result) {
+  if (result.hasErrors()) {
+  }
+}
+```
 
+### Structure of Web Server
+* Layers
+  0. App, Web client
+  1. Web Controller Layer : `@ResetController, @Controller`
+  2. Business Logic Layer : `@Service`
+  3. Data Access Layer    : `@Repository`
+  4. Database
 
+### JavaBean
+1. has public constructure with no parameters
+2. all properites are private, visited by getter (`isXxx` for boolean) and setter
+3. implementes `Serializable` interface
 
+* POJO doesn't have logic, JavaBean could have logic
+
+### Data Transfer between Layers
+* Client/App ---_DTO/VO_---> Web Controller ---_DTO/VO_---> Business Logic ---_PO_--> DataAccess ---_SQL_---> DB
+  * in **Business Logic Layer**, it needs the conversion between `DTO` and `PO`
+    * commons-beanutils, dozer
 
 
 
