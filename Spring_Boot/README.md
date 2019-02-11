@@ -523,11 +523,11 @@ public Object doSomething(@Validated @RequestBody MyClass myclass, BindingResult
 
 ### Structure of Web Server
 * Layers
-  0. App, Web client
-  1. Web Controller Layer : `@ResetController, @Controller`
-  2. Business Logic Layer : `@Service`
-  3. Data Access Layer    : `@Repository`
-  4. Database
+  1. App, Web client
+  1. Web Controller Layer : `@RestController, @Controller`
+  1. Business Logic Layer : `@Service`
+  1. Data Access Layer    : `@Repository`
+  1. Database
 
 ### JavaBean
 1. has public constructure with no parameters
