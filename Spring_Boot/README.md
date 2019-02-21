@@ -369,16 +369,24 @@ class my class extends JpaRepository<User, Integer> {
 
 # Spring-163
 
+> Web pushes out J2EE, which includes EJB (enterprise java bean) 
+> Spring was designed to replace EJB which was quite heavy.
+
 ### IoC & DI
 * IoC - inverse of control
-  * get rid of `Factory` class
+  * get rid of `Factory` class *(IoC pool is another kind of factory)*
   * do NOT need to create object with `new()` and `setters()`
   * getting object from IoC pool
   ```Java
   ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
   MyClass object = context.getBean("MyClass");
   ```
-* DI - 
+
+> **how to understand IoC?**
+> Before DI, let's say `function A(B)`, we need to create `B` first and then pass it to `A()`.
+> With DI, `A()` gets `B` from pool (using DI). Therefore, `B->A` turns to be `A<-B` now.
+
+* DI - Dependency Injection
   1. `setXxxx()`
     ```XML
     <property>
@@ -435,6 +443,7 @@ Aspect oriented programming
   ```
 
 ### Mybatis
+* an ORM (object relation mapping) framework, Hibernate is another sample
 * library to operate database
 * in `conf.xml`
   1. datasource conf
@@ -450,6 +459,10 @@ Aspect oriented programming
 @Qualifier("stuDao")
 ```
 
+* SSH in Java Web means:
+  * **S**pring - DI/AOP
+  * **S**tructs - MVC,  *(Structs is out-of-date since Spring MVC appears)*
+  * **H**ybernate - ORM
 
 # Spring Boot with RESTful-163
 * POJO - plain ordinary java object
