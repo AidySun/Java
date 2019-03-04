@@ -298,9 +298,10 @@ public MyTest {
     * Run Config -> VM arguments " javaagent ..."
     * does not need to kill process manually
 
-2. DevTools
+2. DevTools dependency
   * Re-deploy, not hot deploy
   * works for both java code and html page
+  * relays on `Build Automatically` in Eclipse
 
 ### JPA
 * application.properties
@@ -464,7 +465,21 @@ Aspect oriented programming
   * **S**tructs - MVC,  *(Structs is out-of-date since Spring MVC appears)*
   * **H**ybernate - ORM
 
+
+
 # Spring Boot with RESTful-163
+
+* RESTful (representational state transfer)
+  * stateless
+  * CRUD to resources
+  * for URL, `POST(create), DELETE, PUT(update), GET`
+  * e.g. login & logout : `POST/authorization` & `DELETE/autheorization`
+
+* URI
+  * /resource
+  * /resource/{id}
+  * /reousrce/{id}/subresource
+
 * POJO - plain ordinary java object
 
 * DTO - data transfer object
@@ -476,6 +491,31 @@ Aspect oriented programming
 * PBF - package by feature
 * PBL - package by layer
 
+
+* convert `Date` type to Jason
+  1. `@JsonFormat` annotation
+  2. `application.yml`
+    ```yml
+    spring:
+      jakson:
+        data-fromat: yyyy-MM-dd               # using string format
+        timezone: GMT+8
+        serialazation:
+          write-dates-as-timestamps: true     # or long timestamp, higher priority
+    ```
+
+### @RestController
+```Java
+@RestController
+@RequestMappting("/tvseries")
+class tvController {
+
+  @GetMapping
+  public List<TvSeriesDto> allTv() {
+
+  }
+}
+```
 
 * SLF4j / Commons-logging config
 ```yml
@@ -491,6 +531,9 @@ logging:
 ```sh
 curl -H "Content-type:application/json" -X POST --data '{"id":"110","name":"mason"}' http://localhost:8080/test
 curl -X DELETE [-v] http://localhost:8080/service
+
+# -H - header info
+# -X - post/delete/put
 ```
 
 * Annotation
@@ -554,6 +597,11 @@ public Object doSomething(@Validated @RequestBody MyClass myclass, BindingResult
   * in **Business Logic Layer**, it needs the conversion between `DTO` and `PO`
     * commons-beanutils, dozer
 
+### Database in Spring
+#### Transaction
+* Isolation
+  * serializable > repeatable read > read committed > read uncommitted 
+  * it's better to have retry for failed cases when the isolation is serializable and repeatable read
 
 
 
