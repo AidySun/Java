@@ -269,6 +269,11 @@ From iQiYi.
   ```Java
   public ModelAndView resolverException() { }
   ```
+6. tips
+  ```Java
+  throw new RuntimeException("xxx");  // return code 500
+  throw new ResourceNotFoundException;  // return code 404 
+  ```
 
 ### Test
 ```Java
@@ -467,7 +472,12 @@ Aspect oriented programming
 
 
 
+
+
+
 # Spring Boot with RESTful-163
+
+
 
 * RESTful (representational state transfer)
   * stateless
@@ -492,8 +502,12 @@ Aspect oriented programming
 * PBL - package by layer
 
 
-* convert `Date` type to Jason
-  1. `@JsonFormat` annotation
+* format `Date` type to Jason
+  1. `@JsonFormat` annotation on property
+     ```Java
+     @JsonFormat(timezone="GTM+8", pattern="yyyyMMdd")
+     @JsonFormat(shap=JasonFormat.Shape.NUMBER)  
+     ```
   2. `application.yml`
     ```yml
     spring:
@@ -512,6 +526,15 @@ class tvController {
 
   @GetMapping
   public List<TvSeriesDto> allTv() {
+  }
+
+  @GetMapping("/{id}")
+  public TvSeriesDto getTvById(@PathVariable int id) {
+    // http://localhost::8080/tvseries/103
+  }
+
+  @PostMapping
+  public TvSeriesDto insertOne(@RequestBody TvSeriesDto tv) {
 
   }
 }
@@ -526,7 +549,7 @@ logging:
     ROOT: WARN
       com.aidy.services: DEBUG
 ```
-
+<a name="curl-command-line" />
 * CURL command line
 ```sh
 curl -H "Content-type:application/json" -X POST --data '{"id":"110","name":"mason"}' http://localhost:8080/test
@@ -534,27 +557,41 @@ curl -X DELETE [-v] http://localhost:8080/service
 
 # -H - header info
 # -X - post/delete/put
+# -v - detail info
 ```
 
 * Annotation
 ```Java
-@GetMapping("/{id}")
-public XXXDto get(@PathVariable id) {  }
-@PostMapping
-public XXXDto insert(@RequestBody XXXDto dto) {  }
+@GetMapping("/path/{id}/{all}")
+public XXXDto get(@PathVariable("id") id, @PathVariable("all") boolean getAll) {  }
+@PostMapping // (value="/tvseries" consumes=MeidaType.APPLICATON_FROM_URLENCODED_VALUE)
+public XXXDto insert(@RequestBody XXXDto dto, // RequestBody is the json (or others) posted from client
+                     Authentication auth // org.springframework.security.core.Authentication
+    ) {  
+}
 // post is add, put is update
-@PutMapping("/{id}")
+@PutMapping("/{id:\\d+}")  // RegExp
+//@DeleteMapping
 public XXXDto update(@PathVariable id, 
-                    HttpServletRequest request,
-                    @RequestPama(valid="name", required=false) String name) {  
-  // request.getRemoteAdd()
-  // curl -X Put --data '"{"id":"101"}' http://local:80/service/101?name=aidy
+          HttpServletRequest request,  // no annotation required for HttpServletRequest, Sping boot handlds it automatically
+          @RequestParam(valid="name", required=false) String name, // e.g. form data in POST, or path var. required=true is default
+                                                                  // it also can be get via request.getParameter("name") 
+                                                                  // application/x-www-form-urlencoded
+          HttpServletResponse response
+
+    ) {  
+  // request.getRemoteAddr()   // request ip address
+  // curl -X Put --data '"{"id":"101"}' http://local:80/service/101?name=aidy 
+
+public ResultJSON editCompany(@RequestHeader("user-agent") String userAgent) {
+
+}
 }
 ```
 * Upload and download
 ```Java
 // upload 
-@PostMapping(value="/{id]/photo" comsumes="MULTIPART_FORM_DATA_VALUE")
+@PostMapping(value="/{id]/photo" comsumes="MULTIPART_FORM_DATA_VALUE")  // multipart/form-data
 public void addPhoto(@PathVariable int id, @RequestPama("photo") MultipartFile imageFile) { }
 // download with binary / byte array
 @GetMapping(value="/{id}/icon" produces=MediaType.IMAGE_JPEG_VLAUE)
