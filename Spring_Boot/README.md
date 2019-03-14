@@ -574,7 +574,7 @@ public XXXDto insert(@RequestBody XXXDto dto, // RequestBody is the json (or oth
 //@DeleteMapping
 public XXXDto update(@PathVariable id, 
           HttpServletRequest request,  // no annotation required for HttpServletRequest, Sping boot handlds it automatically
-          @RequestParam(valid="name", required=false) String name, // e.g. form data in POST, or path var. required=true is default
+          @RequestParam(value="name", required=false) String name, // e.g. form data in POST, or path var. required=true is default
                                                                   // it also can be get via request.getParameter("name") 
                                                                   // application/x-www-form-urlencoded
           HttpServletResponse response
@@ -582,12 +582,12 @@ public XXXDto update(@PathVariable id,
     ) {  
   // request.getRemoteAddr()   // request ip address
   // curl -X Put --data '"{"id":"101"}' http://local:80/service/101?name=aidy 
+}
 
 public ResultJSON editCompany(@RequestHeader("user-agent") String userAgent) {
-
-}
 }
 ```
+
 * Upload and download
 ```Java
 // upload 
@@ -596,6 +596,12 @@ public void addPhoto(@PathVariable int id, @RequestPama("photo") MultipartFile i
 // download with binary / byte array
 @GetMapping(value="/{id}/icon" produces=MediaType.IMAGE_JPEG_VLAUE)
 public byte[] getIcon(@PathVariable int id) { }
+```
+
+* Confituration
+```Java
+@Value("{com.name.server.config.name}") // config in applications.properties
+private String name;
 ```
 
 ### Validation 
