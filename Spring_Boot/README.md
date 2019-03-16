@@ -5,9 +5,7 @@ Spring Boot
 
 - [Spring Big Picture](#spring-big-picture)
 - [Java Micro-services Spring Cloud Developing Services](#java-micro-services-spring-cloud-developing-services)
-- [Creating Your First Spring Boot Application](#creating-your-first-spring-boot-application)
 - [Spring Boot - Efficient Development, Configuration and Deployment](#spring-boot---efficient-development-configuration-and-deployment)
-- [Spring Boot \(Micro-services Architecture\)](#spring-boot-micro-services-architecture)
 - [Spring-163](#spring-163)
 - [Spring Boot with RESTful-163](#spring-boot-with-restful-163)
 
@@ -94,7 +92,7 @@ Micro-service
 
 #### Config Server
 1. add `spring-cloud-config-server` and `spring-boot-starter-actuator` in `pom.xml`
-2. add `@EnableConfigServer` annotaton to class
+2. add `@EnableConfigServer` annotation to class
 3. create application properties 
 
 #### Config Client
@@ -126,7 +124,7 @@ Micro-service
   * Encryption and Decryption
   * Refreshing configuration
 
-## Offloading Async Activities with Lightweight, Shot-lived Tasks
+## Offloading Async Activities with Lightweight, Short-lived Tasks
 #### Asynchronous processing in Micro-services
   * reduce dependencies between services
     * messaging is a key component
@@ -174,10 +172,6 @@ Micro-service
 * **TODO: performance tuning**
 
 
-# Creating Your First Spring Boot Application
-* `parent` should be `org.springframework.boot.spring-boot-starter-parent`
-* dependency to `spring-boot-starter-web`
-
 
 # Spring Boot - Efficient Development, Configuration and Deployment
 * Enabling the Auto Configuration Report
@@ -221,11 +215,6 @@ Micro-service
   * [docker-maven-plugin](https://github.com/spotify/docker-maven-plugin)
     * add plugin in `pom.xml`
     * run cmd `./mvnw docker:build`
-
-
-
-# Spring Boot (Micro-services Architecture)
-From iQiYi.
 
 ### Servlet / Filter / Listener
 * two ways to registe Servlet / Filter
@@ -541,6 +530,7 @@ class tvController {
 ```
 
 * SLF4j / Commons-logging config
+
 ```yml
 # yml
 logging:
@@ -551,6 +541,7 @@ logging:
 ```
 <a name="curl-command-line" />
 * CURL command line
+
 ```sh
 curl -H "Content-type:application/json" -X POST --data '{"id":"110","name":"mason"}' http://localhost:8080/test
 curl -X DELETE [-v] http://localhost:8080/service
