@@ -182,6 +182,7 @@ public Object doSomething(@Validated @RequestBody MyClass myclass, BindingResult
   1. Data Access Layer    : `@Repository`
   1. Database
 
+Controller --(`@Autowired MyService myservice;`)--> Service ----> Dao
 * for the classes may be in two or more layers, e.g. @Service and @Repository using `@Component`
 
 * Structure of package
@@ -203,6 +204,13 @@ public Object doSomething(@Validated @RequestBody MyClass myclass, BindingResult
 
 * Simplized ways
   * Using POJO all the way
+    ```Java
+    @SpringApplication
+    @MapperScan("com.yueji.app.dao") // package level   // or @Mapper in POJO/DAO class
+    public class Application {
+    	//... ...
+    }
+    ```
   * Using JavaBean instead of POJO
     * Problems: circle reference
   * Public fileds in POJO, no `getter`/`setter`
