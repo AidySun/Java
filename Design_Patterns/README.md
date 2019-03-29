@@ -1,9 +1,22 @@
 # Notes of [Design Patterns in Java](https://app.pluralsight.com/paths/skills/design-patterns-in-java)
 
 ## TOC
-1. [Creational](#creational)
-2. [Structural](#structural)
-3. [Behavioral](#behavioral)
+
+<!-- MarkdownTOC autolink="true" levels="1,2,3,4"-->
+
+- [CREATIONAL](#creational)
+  - [Singleton](#singleton)
+  - [Builder](#builder)
+  - [Prototype](#prototype)
+  - [Factory](#factory)
+  - [AbstractFactory](#abstractfactory)
+- [STRUCTURAL](#structural)
+  - [Adaptor](#adaptor)
+  - [Bridge](#bridge)
+- [Behavioral](#behavioral)
+
+<!-- /MarkdownTOC -->
+
 
 ----
 
