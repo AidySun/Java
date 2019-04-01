@@ -206,7 +206,7 @@ Controller --(`@Autowired MyService myservice;`)--> Service ----> Dao
   * Using POJO all the way
     ```Java
     @SpringApplication
-    @MapperScan("com.yueji.app.dao") // package level   // or @Mapper in POJO/DAO class
+    @MapperScan("com.yueji.app.dao") // package level   // or @Mapper in POJO/DO class
     public class Application {
     	//... ...
     }
@@ -222,10 +222,20 @@ Controller --(`@Autowired MyService myservice;`)--> Service ----> Dao
 * `ResourceNotFoundException` - 404
 
 
+### Testing
+
+#### Assert vs assert
+* Assert is from `org.junit.Assert`, assert if from Java
+* to enable Java's assert, using `-ea` (enableassertion) parameter when starting JVM
+* JVM will quite if assert is false
+
 ### Database in Spring
 
 #### Transaction
 
+```Java
+@Transational()
+```
 * Isolation
   * serializable > repeatable read > read committed > read uncommitted 
   * it's better to have retry for failed cases when the isolation is serializable and repeatable read
