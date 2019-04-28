@@ -35,3 +35,21 @@ Abstract classes are similar to interfaces. You cannot instantiate them, and the
   * Reader - text
     - `int read(char[] buf)`
   * Writer 
+
+
+### HashMap
+
+> This class makes no guarantees as to the order of the map; in particular, 
+> it does not guarantee that the order will remain constant over time.
+
+* If iteration performance is important:
+  * do not set `capacity` to high (or `load factor` too low) in initialization
+
+* default `load factor` is `.75`, `resizing threshold` 
+* hash table is rehashed (rebuilt) when increasing, by twice
+
+* vs `HashTable`:
+
+>  (The <tt>HashMap</tt> class is roughly equivalent to <tt>Hashtable</tt>, 
+> except that it is unsynchronized and permits nulls, for both kye and value.)  
+
