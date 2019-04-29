@@ -39,17 +39,113 @@ Abstract classes are similar to interfaces. You cannot instantiate them, and the
 
 ### HashMap
 
+`Array` and `LinkedHashMap (with red-black tree)` are used to store nodes.
+
 > This class makes no guarantees as to the order of the map; in particular, 
 > it does not guarantee that the order will remain constant over time.
 
 * If iteration performance is important:
   * do not set `capacity` to high (or `load factor` too low) in initialization
 
-* default `load factor` is `.75`, `resizing threshold` 
+* default `load factor` is `.75`
+  * `resizing threshold = load_factor * capacity`
 * hash table is rehashed (rebuilt) when increasing, by twice
 
-* vs `HashTable`:
 
->  (The <tt>HashMap</tt> class is roughly equivalent to <tt>Hashtable</tt>, 
-> except that it is unsynchronized and permits nulls, for both kye and value.)  
+> The **HashMap** class is roughly equivalent to **Hashtable**, except that :
+> 1. it is unsynchronized 
+> 2. and permits nulls, for both kye and value.  
+
+```Java
+// calculate the index of key
+index = key.hash & (capicity - 1);
+// which is equal to
+index = key.hash % capicity;
+```
+
+* fail-fast
+
+  If the `iterator` is invalid, it would throw `ConcurrentModificationException`
+
+* Capacity of the internal table MUST be power of 2. Even input may be not, it would use:
+
+```Java
+// e.g. 13 which is 1101, whould output 1111 + 1 == 16
+int tableSizeForCapicity(int cap) {
+  int n = cap - 1;
+  n |= n >>> 1;
+  n |= n >>> 2;
+  n |= n >>> 4;
+  n |= n >>> 8;
+  n |= n >>> 16;
+  return (n < 0) ? 1 : n + 1; // simplized
+}
+```
+
+Best choice for single thread.
+
+### Hashtable
+
+It is **synchronized**.
+
+Any **non-null** object can be used as a key or value.
+
+```Java
+// implemented with array + linked list
+/*
+          TABLE 
+    0 | node[n] | -> node[a] -> null;
+    1 | node[x] | -> node[y] -> node[g] -> null;
+    2 | node[l] | -> null
+*/
+Entry <>[] table;
+
+class Entry {
+  Entry next;
+  // ...
+}
+```
+
+### ConcurrentHashMap
+
+It is thread-safe, fully interoperable with **Hastable**.
+
+#### diff vs Hashtable
+* Hashtable 
+  * uses **single lock** to entire table
+* ConcurrentHashMap 
+  * uses **multiple lock** on **Segment** level (16 by default).
+  * only lock for updates, not `get()`
+  * it is more efficient
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
