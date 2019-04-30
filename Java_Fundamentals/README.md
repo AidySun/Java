@@ -67,7 +67,7 @@ index = key.hash % capicity;
 
   If the `iterator` is invalid, it would throw `ConcurrentModificationException`
 
-* Capacity of the internal table MUST be power of 2. Even input may be not, it would use:
+* Capacity of the internal table MUST be **power of 2**. Even input may be not, it would use:
 
 ```Java
 // e.g. 13 which is 1101, whould output 1111 + 1 == 16
