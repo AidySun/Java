@@ -49,7 +49,7 @@ Abstract classes are similar to interfaces. You cannot instantiate them, and the
 
 * default `load factor` is `.75`
   * `resizing threshold = load_factor * capacity`
-* hash table is rehashed (rebuilt) when increasing, by twice
+* hash table is rehashed (rebuilt) when increasing, by twice size
 
 
 > The **HashMap** class is roughly equivalent to **Hashtable**, except that :
@@ -118,6 +118,26 @@ It is thread-safe, fully interoperable with **Hastable**.
   * only lock for updates, not `get()`
   * it is more efficient
 
+### LinkedHashMap/Set
+
+Entries stored in **HashMap**, with *double-linked list* running through all its entries. In insertion-order or access-order.
+
+* insertion-order is not affected when re-insert an existing entry
+* Well-suited to building **LRU caches**
+
+```JAVA
+    final int MAX_CAPACITY = 5;
+    LinkedHashMap<String, String> m = new LinkedHashMap<String, String>(MAX_CAPACITY + 1, .75F, true) {
+      protected boolean removeEldestEntry(Map.Entry<String,String> eldest)  {
+        return size() > MAX_CAPACITY; // return turn to remove eldest entry automatically
+      }
+    };
+```
+
+```Java
+// how to get the "first" entry of a map?
+Object key = linkedHashMap.keySet().iterator().next();
+```
 
 
 
