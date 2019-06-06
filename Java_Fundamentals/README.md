@@ -1,6 +1,24 @@
 
 # Java Fundamentals
 
+<!-- MarkdownTOC autolink="true" -->
+
+- [Abstract Classes Compared to Interfaces](#abstract-classes-compared-to-interfaces)
+- [The Java Language](#the-java-language)
+- [The Core Platform](#the-core-platform)
+- [HashMap](#hashmap)
+- [Hashtable](#hashtable)
+- [ConcurrentHashMap](#concurrenthashmap)
+- [diff vs Hashtable](#diff-vs-hashtable)
+- [LinkedHashMap/Set](#linkedhashmapset)
+- [Tech](#tech)
+- [JSP](#jsp)
+- [Servlet](#servlet)
+- [Session](#session)
+
+<!-- /MarkdownTOC -->
+
+
 #### Abstract Classes Compared to Interfaces
 Abstract classes are similar to interfaces. You cannot instantiate them, and they may contain a mix of methods declared with or without an implementation. However, with abstract classes, you can declare fields that are not static and final, and define public, protected, and private concrete methods. With interfaces, all fields are automatically public, static, and final, and all methods that you declare or define (as default methods) are public. In addition, you can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces.
 * Which should you use, abstract classes or interfaces?
@@ -140,7 +158,24 @@ Object key = linkedHashMap.keySet().iterator().next();
 ```
 
 
+### Tech
 
+#### JSP
+Java Serve page
+
+#### Servlet
+*Small* Java program
+
+#### Session
+Stateful connection. 
+
+* server end
+  * not friendly to cluster
+    * store sessions on shared storage 
+    * force peering between client to server
+* client end
+  * cookie
+  * security issue
 
 
 
