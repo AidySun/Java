@@ -1,37 +1,32 @@
 
 # Java Fundamentals
 
-<!-- MarkdownTOC autolink="true" -->
+<!-- MarkdownTOC autolink="true" levels="1,2,3,4" -->
 
-- [Abstract Classes Compared to Interfaces](#abstract-classes-compared-to-interfaces)
 - [The Java Language](#the-java-language)
-- [The Core Platform](#the-core-platform)
-- [HashMap](#hashmap)
-- [Hashtable](#hashtable)
-- [ConcurrentHashMap](#concurrenthashmap)
-- [diff vs Hashtable](#diff-vs-hashtable)
-- [LinkedHashMap/Set](#linkedhashmapset)
+  - [The Core Platform](#the-core-platform)
+  - [Abstract Classes Compared to Interfaces](#abstract-classes-compared-to-interfaces)
+  - [HashMap](#hashmap)
+  - [Hashtable](#hashtable)
+  - [ConcurrentHashMap](#concurrenthashmap)
+  - [diff vs Hashtable](#diff-vs-hashtable)
+  - [LinkedHashMap/Set](#linkedhashmapset)
 - [Tech](#tech)
-- [JSP](#jsp)
-- [Servlet](#servlet)
-- [Session](#session)
+  - [JSP](#jsp)
+  - [Servlet](#servlet)
+  - [Session](#session)
+  - [RMI](#rmi)
+  - [Dynamic Proxy](#dynamic-proxy)
+  - [AJAX](#ajax)
+- [Dev Tools](#dev-tools)
+  - [`jconsole`](#jconsole)
+  - [`jps`](#jps)
+  - [`jstat`](#jstat)
+  - [`jstatd`](#jstatd)
 
 <!-- /MarkdownTOC -->
 
-
-#### Abstract Classes Compared to Interfaces
-Abstract classes are similar to interfaces. You cannot instantiate them, and they may contain a mix of methods declared with or without an implementation. However, with abstract classes, you can declare fields that are not static and final, and define public, protected, and private concrete methods. With interfaces, all fields are automatically public, static, and final, and all methods that you declare or define (as default methods) are public. In addition, you can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces.
-* Which should you use, abstract classes or interfaces?
-  * Consider using abstract classes if any of these statements apply to your situation:
-    * You want to share code among several closely related classes.
-    * You expect that classes that extend your abstract class have many common methods or fields, or require access modifiers other than public (such as protected and private).
-    * You want to declare non-static or non-final fields. This enables you to define methods that can access and modify the state of the object to which they belong.
-  * Consider using interfaces if any of these statements apply to your situation:
-    * You expect that unrelated classes would implement your interface. For example, the interfaces Comparable and Cloneable are implemented by many unrelated classes.
-    * You want to specify the behavior of a particular data type, but not concerned about who implements its behavior.
-    * You want to take advantage of multiple inheritance of type.
-
-### The Java Language
+## The Java Language
 
 * Nester Types
   * Structure and scoping 
@@ -54,6 +49,17 @@ Abstract classes are similar to interfaces. You cannot instantiate them, and the
     - `int read(char[] buf)`
   * Writer 
 
+### Abstract Classes Compared to Interfaces
+Abstract classes are similar to interfaces. You cannot instantiate them, and they may contain a mix of methods declared with or without an implementation. However, with abstract classes, you can declare fields that are not static and final, and define public, protected, and private concrete methods. With interfaces, all fields are automatically public, static, and final, and all methods that you declare or define (as default methods) are public. In addition, you can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces.
+* Which should you use, abstract classes or interfaces?
+  * Consider using abstract classes if any of these statements apply to your situation:
+    * You want to share code among several closely related classes.
+    * You expect that classes that extend your abstract class have many common methods or fields, or require access modifiers other than public (such as protected and private).
+    * You want to declare non-static or non-final fields. This enables you to define methods that can access and modify the state of the object to which they belong.
+  * Consider using interfaces if any of these statements apply to your situation:
+    * You expect that unrelated classes would implement your interface. For example, the interfaces Comparable and Cloneable are implemented by many unrelated classes.
+    * You want to specify the behavior of a particular data type, but not concerned about who implements its behavior.
+    * You want to take advantage of multiple inheritance of type.
 
 ### HashMap
 
@@ -128,7 +134,7 @@ class Entry {
 
 It is thread-safe, fully interoperable with **Hastable**.
 
-#### diff vs Hashtable
+### diff vs Hashtable
 * Hashtable 
   * uses **single lock** to entire table
 * ConcurrentHashMap 
@@ -158,15 +164,15 @@ Object key = linkedHashMap.keySet().iterator().next();
 ```
 
 
-### Tech
+## Tech
 
-#### JSP
+### JSP
 Java Serve page
 
-#### Servlet
+### Servlet
 *Small* Java program
 
-#### Session
+### Session
 Stateful connection. 
 
 * server end
@@ -178,6 +184,91 @@ Stateful connection.
   * security issue
 
 
+### RMI
+*reference from Data-Structure-and-Algorithm*
+
+```Java
+// 1. server service object
+java.rmi.remote
+java.rmi.server.UnicastRemoteObject
+// 2. generate proxy objects stub/skel
+rmic MyServiceImpl
+// 3. registry
+Naming.rebind()
+// 4. client
+Naming.lookup(rmi://127.0.0.1/MyService)
+// client can get stub at compile time, or using dynamic class downloading at runtime
+```
+* `transient` - not to serialize the property
+
+### Dynamic Proxy
+* Dynamic - means the `Proxy` **class** is created dymanically at runtime.
+  * it doesn't mean to map the hander and real object at runtime.
+  * there is no specific proxy class was decleared when starting
+
+```Java
+class PersonBean { ... } // real object
+
+class OwnerInvocationHandler implements InvocationHandler {
+  PersonBean person;
+  public OwnerInvocationHandler(Person p) {
+    person = p;
+  }
+
+  public Object invoke(Object proxy, Method m, Object[] args) {
+    try {
+      if (m.getName().equals("setSalary")) {
+        throw new IllegalAccessException(); // self cannot set salary
+      } else {
+        return m.invoke(person, args);
+      }
+    } catch (InvocateTargetException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+}
+
+// create proxy class
+PersonBean getOwnerProxy(PersonBean p) {
+  return (PersonBean) Proxy.newProxyInstance(
+    p.getClass().getClassLoader(),
+    p.getClass().getInterfaces(),
+    new OwnerInvocationHandler(p));
+}
+
+// usage
+PersionBean p = new PersonBean();
+PersonBean ownerProxy = getOwnerProxy(p);
+ownerProxy.setSalary(1000000);  // ohh, exception
+```
+
+### AJAX
+Asyncronous Javascript And XML (JSON in nowadays)
+
+## Dev Tools
+
+### `jconsole`
+* It a graphic user interface and a monitoring tool compiles to Java Management Extension (**JMX**).
+* Location `JDK_HOME/bin`
+* usage
+  ```shell
+  $ jconsole
+  $ jconsole processID
+  $ jconsole hostName:port  # remote
+  ```
+
+### `jps`
+
+* List JVM on target system
+
+### `jstat`
+
+* Monitor JVM statistics
+
+### `jstatd`
+
+* monitor the creation and termination of Java HotSpot VMs.
 
 
 
